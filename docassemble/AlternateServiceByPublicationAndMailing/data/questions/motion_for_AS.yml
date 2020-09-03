@@ -1,3 +1,7 @@
+---
+include:
+  - docassemble.MAVirtualCourt:basic-questions.yml
+---
 comment: |
   The metadata section controls the tab title and saved interview title. You can delete this section if you include this YAML file in another YAML file.
 metadata:
@@ -29,9 +33,6 @@ code: |
     'typical role': 'unknown',
   })
 ---
-include:
-  - docassemble.MAVirtualCourt:basic-questions.yml
----
 features: 
   navigation: True
 ---
@@ -52,9 +53,9 @@ code: |
   defendant_fullname
   newspaper_name
   newspaper_address
-  motion_hearing_city
-  motion_hearing_date
-  motion_hearing_time
+  #motion_hearing_city
+  #motion_hearing_date
+  #motion_hearing_time
   last_known_address
   served_userfull
   served_address_street
@@ -154,22 +155,22 @@ subquestion: |
 fields:
   - 'Motion hearing city': motion_hearing_city
 ---
-id: When will the hearing be held?
-question: |
-  When will the hearing be held?
-subquestion: |
-  Placeholder text
-fields:
-  - 'Date of motion hearing': motion_hearing_date
-    datatype: date
+#id: When will the hearing be held?
+#question: |
+#  When will the hearing be held?
+#subquestion: |
+#  Placeholder text
+#fields:
+#  - 'Date of motion hearing': motion_hearing_date
+#    datatype: date
 ---
-id: What time will the hearing be held?
-question: |
-  What time will the hearing be held?
-subquestion: |
-  Placeholder text
-fields:
-  - 'Motion hearing time': motion_hearing_time
+#id: What time will the hearing be held?
+#question: |
+#  What time will the hearing be held?
+#subquestion: |
+#  Placeholder text
+#fields:
+#  - 'Motion hearing time': motion_hearing_time
 ---
 id: What is the name of the person you will be serving?
 question: |
@@ -359,10 +360,10 @@ attachment:
       - "last_known_address": ${ last_known_address }
       - "newspaper_name": ${ newspaper_name }
       - "newspaper_address": ${ newspaper_address }
-      - "motion_hearing_city": ${ motion_hearing_city }
-      - "motion_hearing_date": ${ motion_hearing_date }
+      #- "motion_hearing_city": ${ motion_hearing_city }
+      #- "motion_hearing_date": ${ motion_hearing_date }
       - "user_telephone_number": ${ user_telephone_number }
-      - "motion_hearing_time": ${ motion_hearing_time }
+      #- "motion_hearing_time": ${ motion_hearing_time }
       - "bbo_number": ${ bbo_number }
       - "court_name_short": ${ court_name_short }
       - "service_date": ${ service_date }
@@ -437,22 +438,22 @@ review:
     button: |
       Newspaper Address:
       ${ newspaper_address }
-  - Edit: motion_hearing_city
-    button: |
-      Motion hearing city:
-      ${ motion_hearing_city }
-  - Edit: motion_hearing_date
-    button: |
-      Date of motion hearing:
-      ${ motion_hearing_date.format() }
+  #- Edit: motion_hearing_city
+   # button: |
+     # Motion hearing city:
+     # ${ motion_hearing_city }
+  #- Edit: motion_hearing_date
+   # button: |
+      #Date of motion hearing:
+      #${ motion_hearing_date.format() }
   - Edit: user_telephone_number
     button: |
       User telephone number:
       ${ user_telephone_number }
-  - Edit: motion_hearing_time
-    button: |
-      Motion hearing time:
-      ${ motion_hearing_time }
+#  - Edit: motion_hearing_time
+#    button: |
+#      Motion hearing time:
+#      ${ motion_hearing_time }
   - Edit: bbo_number
     button: |
       Bbo number:
