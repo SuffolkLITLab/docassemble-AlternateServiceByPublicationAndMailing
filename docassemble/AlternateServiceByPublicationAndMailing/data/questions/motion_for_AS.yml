@@ -1,0 +1,549 @@
+comment: |
+  The metadata section controls the tab title and saved interview title. You can delete this section if you include this YAML file in another YAML file.
+metadata:
+  title: |
+    Motion for Alternative Service by Publication and Mailing
+  short title: |
+    Motion AS
+---
+comment: |
+  This section is used by MAVirtualCourts to control how some of the questions work.
+mandatory: True
+code: |
+  interview_metadata # make sure we initialize the object
+  if not defined("interview_metadata['motion_for_AS']"):
+    interview_metadata.initializeObject('motion_for_AS')
+  interview_metadata['motion_for_AS'].update({
+    'title': 'Motion for Alternative Service by Publication and Mailing',
+    'short title': 'Motion AS',
+    'description': 'If the sheriff could not serve the defendant with a Divorce /Separate Support Summons in person or if you do not know where the Defendant lives, ask the court for an order for Alternate Service by Publication and Mailing.',
+    'original_form': 'https://www.masslegalhelp.org/family/cjd400-motion-for-alternate-service-and-affidavit.pdf',
+    'allowed courts': [
+      'Probate and Family Court',
+    ],
+    'categories': [
+      'Family Law',
+    ],
+    'logic block variable': 'motion_for_AS',
+    'attachment block variable': 'motion_for_AS_attachment',
+    'typical role': 'unknown',
+  })
+---
+include:
+  - docassemble.MAVirtualCourt:basic-questions.yml
+---
+features: 
+  navigation: True
+---
+sections:
+  - review_motion_for_AS: Review your answers
+---
+id: interview_order_motion_for_AS
+code: |
+  # This is a placeholder to control logic flow in this interview
+
+  basic_questions_intro_screen 
+  motion_for_AS_intro
+  # Set the preferred/allowed courts for this interview
+  allowed_courts = interview_metadata["motion_for_AS"]["allowed courts"]
+  nav.set_section('review_motion_for_AS')
+  user_fullname
+  check_plaintiff
+  defendant_fullname
+  newspaper_name
+  newspaper_address
+  motion_hearing_city
+  motion_hearing_date
+  motion_hearing_time
+  last_known_address
+  served_userfull
+  served_address_street
+  delivered_hand
+  delivery_date
+  delivery_time
+  date_mailed
+  service_date
+  affidavit_text
+  affidvait_date
+  court_name_short
+  plaintiff_fullname
+  user_telephone_number
+  bbo_number
+  docket_numbers
+  signature_date
+  str(users[0])
+  users[0].address.address
+  users[0].address.city
+  users[0].address.state
+  users[0].address.zip
+  motion_for_AS_preview_question # Pre-canned preview screen
+  basic_questions_signature_flow
+  users[0].signature
+  motion_for_AS = True
+---
+comment: |
+  This question is used to introduce your interview. Please customize
+id: Motion for Alternative Service by Publication and Mailing
+continue button field: motion_for_AS_intro
+question: |
+  Motion for Alternative Service by Publication and Mailing
+subquestion: |
+  If the sheriff could not serve the defendant with a Divorce /Separate Support Summons in person or if you do not know where the Defendant lives, ask the court for an order for Alternate Service by Publication and Mailing.
+---
+id: Placeholder preview screen
+continue button field: motion_for_AS_preview_question
+question: |
+  Placeholder preview screen
+subquestion: |
+  Here is a preview of the form you'll sign on the next page. 
+  
+   ${motion_for_AS_attachment['preview']}
+---
+id: What is your name?
+question: |
+  What is your name?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Full Name': user_fullname
+---
+id: Did you start this case or are you responding to someone else's case?
+question: |
+  Did you start this case or are you responding to someone else's case?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Plaintiff': check_plaintiff
+    datatype: yesno
+  - 'Defendant': check_defendant
+    datatype: yesno
+  - 'Petitioner': check_petitioner
+    datatype: yesno
+  - 'Respondent': check_respondent
+    datatype: yesno
+---
+id: Who is the other party in this matter?
+question: |
+  Who is the other party in this matter?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Defendant Full Name': defendant_fullname
+---
+id: What is the name of the newspaper for the area where defendant last lived?
+question: |
+  What is the name of the newspaper for the area where defendant last lived?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Newspaper Name': newspaper_name
+---
+id: What is the address of the newspaper where defendant last lived?
+question: |
+  What is the address of the newspaper where defendant last lived?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Newspaper Address': newspaper_address
+---
+id: Where will the hearing be held?
+question: |
+  Where will the hearing be held?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Motion hearing city': motion_hearing_city
+---
+id: When will the hearing be held?
+question: |
+  When will the hearing be held?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Date of motion hearing': motion_hearing_date
+    datatype: date
+---
+id: What time will the hearing be held?
+question: |
+  What time will the hearing be held?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Motion hearing time': motion_hearing_time
+---
+id: What is the name of the person you will be serving?
+question: |
+  What is the name of the person you will be serving?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Defendant': defendant_fullname
+---
+id: What is the last known address of the person?
+question: |
+  What is the last known address of the person?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Last Known Address': last_known_address
+---
+id: What is the name of the person you will be serving?
+question: |
+  What is the name of the person you will be serving?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Name of Served': served_userfull
+---
+id: What is the address of the party that was served?
+question: |
+  What is the address of the party that was served?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Served address': served_address_street
+  - 'Served address city': served_address_city
+  - 'Served address state': served_address_state
+  - 'Served address zip': served_address_zip
+---
+id: Was service delivered by hand or by mail?
+question: |
+  Was service delivered by hand or by mail?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Delivered by hand': delivered_hand
+    datatype: yesno
+  - 'Delivered by mail': delivered_mail
+    datatype: yesno
+---
+id: Since the service was delivered by hand, what date was service delivered?
+question: |
+  Since the service was delivered by hand, what date was service delivered?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Date of delivery': delivery_date
+    datatype: date
+---
+id: Since the service was delivered by hand, what time was service delivered?
+question: |
+  Since the service was delivered by hand, what time was service delivered?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Delivery time': delivery_time
+  - 'Time am': time_AM
+    datatype: yesno
+  - 'Time pm': time_PM
+    datatype: yesno
+---
+id: Since the service was mailed, what date was the postage paid on?
+question: |
+  Since the service was mailed, what date was the postage paid on?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Date mailed': date_mailed
+---
+id: Today's Date (Certificate of Service)
+question: |
+  Today's Date (Certificate of Service)
+subquestion: |
+  Placeholder text
+fields:
+  - 'Date of service': service_date
+    datatype: date
+---
+id: In support of your motion for alternate service, you need to provide an affidavit
+question: |
+  In support of your motion for alternate service, you need to provide an affidavit
+subquestion: |
+  Placeholder text
+fields:
+  - 'Affidavit': affidavit_text
+    input type: area
+---
+id: Today's Date (Affidavit)
+question: |
+  Today's Date (Affidavit)
+subquestion: |
+  Placeholder text
+fields:
+  - 'Date of affidvait': affidvait_date
+    datatype: date
+---
+id: What is the name of the court you will be filing this with?
+question: |
+  What is the name of the court you will be filing this with?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Court Name': court_name_short
+  - 'Court name': court_name_short
+  - 'Court name': court_name_short
+---
+id: What is your name? (Plaintiff)
+question: |
+  What is your name? (Plaintiff)
+subquestion: |
+  Placeholder text
+fields:
+  - 'Plaintiff Full Name': plaintiff_fullname
+  - 'Plaintiff': plaintiff_fullname
+---
+id: What is your phone number?
+question: |
+  What is your phone number?
+subquestion: |
+  Placeholder text
+fields:
+  - 'User telephone number': user_telephone_number
+---
+id: If you are an attorney, what is your BBO number?
+question: |
+  If you are an attorney, what is your BBO number?
+subquestion: |
+  Placeholder text
+fields:
+  - 'Bbo number': bbo_number
+---
+progress: 100
+mandatory: True
+id: Placeholder download screen
+question: |
+  Placeholder download screen
+subquestion: |
+  Placeholder
+  
+  ### Next steps
+  
+  1. Step 1
+  1. Step 2
+  
+  Below is a preview of your form.
+  
+  ${motion_for_AS_attachment['final'] }
+need: motion_for_AS
+attachment code: motion_for_AS_attachment['final']
+---
+objects:
+  - motion_for_AS_attachment: DADict
+---
+attachment:
+    variable name: motion_for_AS_attachment[i]
+    name: Motion AS
+    filename: Motion_AS
+    skip undefined: True
+    pdf template file: motion_for_AS.pdf
+    fields: 
+      - "docket_number": ${ docket_numbers }
+      - "signature_date": ${ signature_date }
+      # If it is a signature, test which file version we're expecting. leave it empty unless it's the final attachment version
+      - "user_signature": ${ users[0].signature if i == 'final' else '' }
+      - "user_name": ${ str(users[0]) }
+      - "user_address_street": ${ users[0].address.address }
+      - "user_address_city": ${ users[0].address.city }
+      - "user_address_state": ${ users[0].address.state }
+      - "user_address_zip": ${ users[0].address.zip }
+      - "docket_number": ${ docket_numbers }
+      - "docket_number": ${ docket_numbers }
+      - "court_name_short": ${ court_name_short }
+      - "plaintiff_fullname": ${ plaintiff_fullname }
+      - "defendant_fullname": ${ defendant_fullname }
+      - "check_plaintiff": ${ check_plaintiff }
+      - "check_defendant": ${ check_defendant }
+      - "check_petitioner": ${ check_petitioner }
+      - "check_respondent": ${ check_respondent }
+      - "user_fullname": ${ user_fullname }
+      - "last_known_address": ${ last_known_address }
+      - "newspaper_name": ${ newspaper_name }
+      - "newspaper_address": ${ newspaper_address }
+      - "motion_hearing_city": ${ motion_hearing_city }
+      - "motion_hearing_date": ${ motion_hearing_date }
+      - "user_telephone_number": ${ user_telephone_number }
+      - "motion_hearing_time": ${ motion_hearing_time }
+      - "bbo_number": ${ bbo_number }
+      - "court_name_short": ${ court_name_short }
+      - "service_date": ${ service_date }
+      - "served_userfull": ${ served_userfull }
+      - "served_address_street": ${ served_address_street }
+      - "served_address_city": ${ served_address_city }
+      - "served_address_state": ${ served_address_state }
+      - "served_address_zip": ${ served_address_zip }
+      - "delivery_time": ${ delivery_time }
+      - "delivered_hand": ${ delivered_hand }
+      - "delivery_date": ${ delivery_date }
+      - "time_AM": ${ time_AM }
+      - "time_PM": ${ time_PM }
+      - "delivered_mail": ${ delivered_mail }
+      - "date_mailed": ${ date_mailed }
+      - "court_name_short": ${ court_name_short }
+      - "plaintiff_fullname": ${ plaintiff_fullname }
+      - "defendant_fullname": ${ defendant_fullname }
+      - "affidavit_text": ${ affidavit_text }
+      - "affidvait_date": ${ affidvait_date }
+      - "service_signature": ${ service_signature }
+      - "user_signature_affidavit": ${ user_signature_affidavit }
+---
+id: motion_for_AS review screen
+event: review_motion_for_AS
+question: |
+  Placeholder Review Screen
+subquestion: |
+  Edit your answers below
+review: 
+  - Edit: court_name_short
+    button: |
+      Court Name:
+      ${ court_name_short }
+  - Edit: plaintiff_fullname
+    button: |
+      Plaintiff Full Name:
+      ${ plaintiff_fullname }
+  - Edit: defendant_fullname
+    button: |
+      Defendant Full Name:
+      ${ defendant_fullname }
+  - Edit: check_plaintiff
+    button: |
+      Plaintiff:
+      ${ word(yesno(check_plaintiff)) }
+  - Edit: check_defendant
+    button: |
+      Defendant:
+      ${ word(yesno(check_defendant)) }
+  - Edit: check_petitioner
+    button: |
+      Petitioner:
+      ${ word(yesno(check_petitioner)) }
+  - Edit: check_respondent
+    button: |
+      Respondent:
+      ${ word(yesno(check_respondent)) }
+  - Edit: user_fullname
+    button: |
+      Full Name:
+      ${ user_fullname }
+  - Edit: last_known_address
+    button: |
+      Last Known Address:
+      ${ last_known_address }
+  - Edit: newspaper_name
+    button: |
+      Newspaper Name:
+      ${ newspaper_name }
+  - Edit: newspaper_address
+    button: |
+      Newspaper Address:
+      ${ newspaper_address }
+  - Edit: motion_hearing_city
+    button: |
+      Motion hearing city:
+      ${ motion_hearing_city }
+  - Edit: motion_hearing_date
+    button: |
+      Date of motion hearing:
+      ${ motion_hearing_date.format() }
+  - Edit: user_telephone_number
+    button: |
+      User telephone number:
+      ${ user_telephone_number }
+  - Edit: motion_hearing_time
+    button: |
+      Motion hearing time:
+      ${ motion_hearing_time }
+  - Edit: bbo_number
+    button: |
+      Bbo number:
+      ${ bbo_number }
+  - Edit: service_date
+    button: |
+      Date of service:
+      ${ service_date.format() }
+  - Edit: served_userfull
+    button: |
+      Name of Served:
+      ${ served_userfull }
+  - Edit: served_address_street
+    button: |
+      Served address:
+      ${ served_address_street }
+  - Edit: served_address_city
+    button: |
+      Served address city:
+      ${ served_address_city }
+  - Edit: served_address_state
+    button: |
+      Served address state:
+      ${ served_address_state }
+  - Edit: served_address_zip
+    button: |
+      Served address zip:
+      ${ served_address_zip }
+  - Edit: delivery_time
+    button: |
+      Delivery time:
+      ${ delivery_time }
+  - Edit: delivered_hand
+    button: |
+      Delivered by hand:
+      ${ word(yesno(delivered_hand)) }
+  - Edit: delivery_date
+    button: |
+      Date of delivery:
+      ${ delivery_date.format() }
+  - Edit: time_AM
+    button: |
+      Time am:
+      ${ word(yesno(time_AM)) }
+  - Edit: time_PM
+    button: |
+      Time pm:
+      ${ word(yesno(time_PM)) }
+  - Edit: delivered_mail
+    button: |
+      Delivered by mail:
+      ${ word(yesno(delivered_mail)) }
+  - Edit: date_mailed
+    button: |
+      Date mailed:
+      ${ date_mailed }
+  - Edit: affidavit_text
+    button: |
+      Affidavit:
+      > ${ single_paragraph(affidavit_text) }
+  - Edit: affidvait_date
+    button: |
+      Date of affidvait:
+      ${ affidvait_date.format() }
+  - Edit: docket_numbers
+    button: |
+      ${ docket_numbers }
+  - Edit: signature_date
+    button: |
+      ${ signature_date }
+  - Edit: users[0].signature
+    button: |
+      ${ users[0].signature }
+  - Edit: users[0]
+    button: |
+      ${ users[0] }
+  - Edit: users[0].address.address
+    button: |
+      ${ users[0].address.address }
+  - Edit: users[0].address.city
+    button: |
+      ${ users[0].address.city }
+  - Edit: users[0].address.state
+    button: |
+      ${ users[0].address.state }
+  - Edit: users[0].address.zip
+    button: |
+      ${ users[0].address.zip }
+  - Edit: service_signature
+    button: |
+      ${ service_signature }
+  - Edit: user_signature_affidavit
+    button: |
+      ${ user_signature_affidavit }
